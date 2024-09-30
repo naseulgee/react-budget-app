@@ -47,11 +47,14 @@ git push origin master
 ## 패키지 설치 및 세팅
 ```
 npx create-react-app 경로/어플명
-npm i sass --save
+npm i -D postcss autoprefixer
 ```
 1. 프로젝트 생성
-2. SCSS 사용을 위한 패키지 설치
-    - sass
+2. CSS 를 위한 패키지 설치
+    - postcss
+        : css 파일의 후처리를 도와줌
+    - autoprefixer
+        : 접근성을 위한 접두사를 붙여줌
 
 ### [옵션] 추가 패키지 설치 및 세팅
 ```
@@ -59,7 +62,8 @@ npm i -D tailwindcss
 ```
 1. tailwindcss 패키지 설치
     - tailwindcss
-        : 리액트에서 bootstrap 사용 시, 클래스명 선언이 아닌 컴포넌트 추가 방식으로 사용해야 함으로 불편함
+        : 클래스명 선언 방식으로 사용 가능
+        : 리액트에서 bootstrap 사용 시, 스타일 컴포넌트 추가 방식으로 사용해야 함으로 불편함
 
 ## 기본 테스트를 위한 파일 및 폴더 생성
 1. src/assets/images
@@ -67,7 +71,8 @@ npm i -D tailwindcss
 4. src/pages
 
 ## 설정 파일 생성
-1. tailwind.config.js
+1. postcss.config.js
+2. tailwind.config.js
 
 ### 파일 내용 수정
 1. /src/index.css
