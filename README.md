@@ -4,6 +4,7 @@
 <summary>접기/펼치기</summary>
 
 ## Extensions
+- ES7+ React/Redux/React-Native snippets
 - Tailwind CSS IntelliSense
 - Prettier
 - Auto Close Tag
@@ -60,21 +61,28 @@ npm i -D postcss autoprefixer
 
 ### [옵션] 추가 패키지 설치 및 세팅
 ```
-npm i -D tailwindcss
+npm i -D tailwindcss prettier prettier-plugin-tailwindcss
 ```
 1. tailwindcss 패키지 설치
     - tailwindcss
         : 클래스명 선언 방식으로 사용 가능
         : 리액트에서 bootstrap 사용 시, 스타일 컴포넌트 추가 방식으로 사용해야 함으로 불편함
+    - prettier
+        : 코드 포멧팅
+    - prettier-plugin-tailwindcss
+        : prettier 가 코드 포맷팅 시 tailwindcss 유틸리티 클래스를 지정된 기준에 따라 알파벳 순서로 자동 정렬
 
 ## 기본 테스트를 위한 파일 및 폴더 생성
 1. src/assets/images
-3. src/components
-4. src/pages
+3. src/components/index.js
+4. src/pages/index.js
 
 ## 설정 파일 생성
-1. postcss.config.js
-2. tailwind.config.js
+1. jsconfig.json
+2. postcss.config.js
+3. tailwind.config.js
+4. .prettierrc
+4. .prettierignore
 
 ### 파일 내용 수정
 1. /src/index.css
