@@ -4,6 +4,8 @@
 <summary>접기/펼치기</summary>
 
 ## Extensions
+- Tailwind CSS IntelliSense
+- Prettier
 - Auto Close Tag
 - Auto Rename Tag
 - Dracula Official
