@@ -47,19 +47,30 @@ git push origin master
 ## 패키지 설치 및 세팅
 ```
 npx create-react-app 경로/어플명
+npm i sass --save
 ```
 1. 프로젝트 생성
+2. SCSS 사용을 위한 패키지 설치
+    - sass
+
+### [옵션] 추가 패키지 설치 및 세팅
+```
+npm i -D tailwindcss
+```
+1. tailwindcss 패키지 설치
+    - tailwindcss
+        : 리액트에서 bootstrap 사용 시, 클래스명 선언이 아닌 컴포넌트 추가 방식으로 사용해야 함으로 불편함
 
 ## 기본 테스트를 위한 파일 및 폴더 생성
-1. src/assets/scss/main.scss
-2. src/components
-3. src/pages
+1. src/assets/images
+3. src/components
+4. src/pages
 
 ## 설정 파일 생성
-1. 
+1. tailwind.config.js
 
 ### 파일 내용 수정
-1. 
+1. /src/index.css
 </details>
 <!-- end  : ================================================================ -->
 
