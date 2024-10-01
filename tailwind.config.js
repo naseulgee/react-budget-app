@@ -20,6 +20,10 @@ module.exports = {
         primary: '#926EDC',
         secondary: '#C89AF2',
         active: colors.gray['950'],
+        success: colors.green['500'],
+        danger: colors.red['500'],
+        warning: colors.orange['500'],
+        info: colors.gray['500'],
       },
       boxShadow: {
         't-sm': '0 -1px 2px 0 rgb(0 0 0 / 0.05)',

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ExpenseItem } from 'components'
+import { FaTrashCan } from 'react-icons/fa6'
 
 export default class ExpenseList extends Component {
   render() {
@@ -10,7 +11,8 @@ export default class ExpenseList extends Component {
           <span>0 원</span>
         </h1>
         <button type='button' className='mb-10 mt-3 text-sm text-gray-500'>
-          목록 지우기
+          <FaTrashCan className='me-1 inline align-text-top' />
+          목록 비우기
         </button>
         <ul className='flex flex-col gap-5'>
           <li>

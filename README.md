@@ -62,6 +62,7 @@ npm i -D postcss autoprefixer
 ### [옵션] 추가 패키지 설치 및 세팅
 ```
 npm i -D tailwindcss prettier prettier-plugin-tailwindcss
+npm i react-icons
 ```
 1. tailwindcss 패키지 설치
     - tailwindcss
@@ -71,6 +72,9 @@ npm i -D tailwindcss prettier prettier-plugin-tailwindcss
         : 코드 포멧팅
     - prettier-plugin-tailwindcss
         : prettier 가 코드 포맷팅 시 tailwindcss 유틸리티 클래스를 지정된 기준에 따라 알파벳 순서로 자동 정렬
+2. icon 패키지 설치
+    - react-icons
+        : FontAwesome 을 포함해 여러 아이콘 라이브러리를 제공하는 패키지
 
 ## 기본 테스트를 위한 파일 및 폴더 생성
 1. src/assets/images
