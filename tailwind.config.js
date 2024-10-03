@@ -8,8 +8,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     // 컴포넌트 파일 경로
-    './src/*.{js,jsx,ts,tsx}',
-    './src/**/*.{js,jsx,ts,tsx}',
+    './src/**/*.{js,jsx,ts,tsx}'
   ],
   // tailwind 스타일 변수 사용자 정의
   theme: {
@@ -23,7 +22,7 @@ module.exports = {
         success: colors.green['500'],
         danger: colors.red['500'],
         warning: colors.orange['500'],
-        info: colors.gray['500'],
+        info: colors.gray['500']
       },
       boxShadow: {
         't-sm': '0 -1px 2px 0 rgb(0 0 0 / 0.05)',
@@ -31,9 +30,9 @@ module.exports = {
         't-md': '0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1)',
         't-lg': '0 -10px 15px -3px rgb(0 0 0 / 0.1), 0 -4px 6px -4px rgb(0 0 0 / 0.1)',
         't-xl': '0 -20px 25px -5px rgb(0 0 0 / 0.1), 0 -8px 10px -6px rgb(0 0 0 / 0.1)',
-        't-2xl': '0 -25px 50px -12px rgb(0 0 0 / 0.25)',
-      },
-    },
+        't-2xl': '0 -25px 50px -12px rgb(0 0 0 / 0.25)'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }
