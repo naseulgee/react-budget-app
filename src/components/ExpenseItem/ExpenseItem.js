@@ -11,13 +11,15 @@ export default class ExpenseItem extends Component {
         <div className='flex basis-full justify-end gap-2 md:basis-1/12'>
           <button
             type='button'
-            className='text-success md:basis-1/2'>
+            className='text-success md:basis-1/2'
+            onClick={() => this.props.handleModify(this.props.expense.id)}>
             <FaPen className='inline align-text-top' />
             <span className='ms-2 inline md:hidden'>수정</span>
           </button>
           <button
             type='button'
-            className='text-danger md:basis-1/2'>
+            className='text-danger md:basis-1/2'
+            onClick={() => this.props.handleDelete(this.props.expense.id)}>
             <FaTrashCan className='inline align-text-top' />
             <span className='ms-2 inline md:hidden'>삭제</span>
           </button>
@@ -28,5 +30,7 @@ export default class ExpenseItem extends Component {
 }
 
 ExpenseItem.propTypes = {
-  expense: PropTypes.object
+  expense: PropTypes.object,
+  handleDelete: PropTypes.func,
+  handleModify: PropTypes.func
 }

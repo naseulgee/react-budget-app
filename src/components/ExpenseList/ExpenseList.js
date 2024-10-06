@@ -18,11 +18,19 @@ export default class ExpenseList extends Component {
           목록 비우기
         </button>
         <ul className='flex flex-col gap-5'>
-          {this.props.expenses.map(expense => (
-            <li key={expense.id}>
-              <ExpenseItem expense={expense} />
-            </li>
-          ))}
+          {
+            // 상속받은 데이터는 this.props 를 통해 접근이 가능하다
+            this.props.expenses.map(expense => (
+              // 배열 반복 시 key 라는 키워드를 이용하여 고유값을 선언해줘야 한다
+              <li key={expense.id}>
+                <ExpenseItem
+                  expense={expense}
+                  handleDelete={this.props.handleDelete}
+                  handleModify={this.props.handleModify}
+                />
+              </li>
+            ))
+          }
         </ul>
       </section>
     )
@@ -31,5 +39,7 @@ export default class ExpenseList extends Component {
 
 // 상속 데이터 타입 정의
 ExpenseList.propTypes = {
-  expenses: PropTypes.array
+  expenses: PropTypes.array,
+  handleDelete: PropTypes.func,
+  handleModify: PropTypes.func
 }
