@@ -23,12 +23,21 @@ const App = () => {
    *    - 클래스형: this.setState({ 상태명: 값 })
    *    - 함수형  : set변수명(값)
    */
-  const [expenses, setExpenses] = useState([
-    { id: 1, charge: '렌트비', amount: 1600 },
-    { id: 2, charge: '교통비', amount: 400 },
-    { id: 3, charge: '식비', amount: 1200 }
-  ])
 
+  // 지출 목록
+  const [expenses, setExpenses] = useState([])
+  const handleSubmit = e => {
+    // 폼 제출과 동시에 페이지 새로고침 등 방지
+    e.preventDefault()
+
+    if (charge == '' || amount == 0) return
+
+    // 지출 목록 세팅
+    setExpenses([...expenses, { id: crypto.randomUUID(), charge: charge, amount: amount }]) // 기존 목록 + 신규 내용
+    // 입력 값 리셋
+    setCharge('')
+    setAmount(0)
+  }
   const handleDelete = id => {
     // 전달받은 id 만 제외하여 새로운 배열 생성
     const newExpenses = expenses.filter(expense => expense.id != id)
@@ -39,11 +48,29 @@ const App = () => {
     console.log(id)
   }
 
+  // 지출 항목
+  const [charge, setCharge] = useState('')
+  const handleCharge = e => {
+    setCharge(e.target.value)
+  }
+
+  // 비용
+  const [amount, setAmount] = useState(0)
+  const handleAmount = e => {
+    setAmount(e.target.valueAsNumber)
+  }
+
   // UI 작성 부분
   return (
     <main>
       {/* 지출 등록 */}
-      <ExpenseForm />
+      <ExpenseForm
+        charge={charge}
+        handleCharge={handleCharge}
+        amount={amount}
+        handleAmount={handleAmount}
+        handleSubmit={handleSubmit}
+      />
       {
         /* 지출 목록 */
         // 데이터(변수, 함수)는 HTML 의 속성처럼 전달(상속)해줄 수 있다
