@@ -46,8 +46,14 @@ class App extends Component {
     // 폼 제출과 동시에 페이지 새로고침 등 방지
     e.preventDefault()
 
-    const { expenses, charge, amount, edit, editId } = this.state
-    if (charge == '' || amount == 0) return
+    const { expenses, charge, amount, alert, edit, editId } = this.state
+    if (charge == '' || amount == 0) {
+      if (alert.isShow) return
+      // 알림창 호출 및 제거 타이머
+      this.setState({ alert: { isShow: true, text: '내용을 입력해 주세요', isSuccess: false } })
+      this.hideAlert()
+      return
+    }
 
     // 지출 목록 세팅
     let newExpenses
@@ -117,10 +123,10 @@ class App extends Component {
         <header>
           {
             /** 삼항 연산자를 이용한 조건부 렌더링 */
-            alert.isShow && (
+            this.state.alert.isShow && (
               <AlertCC
-                text={alert.text}
-                type={alert.isSuccess ? 'success' : 'warning'}
+                text={this.state.alert.text}
+                isSuccess={this.state.alert.isSuccess}
               />
             )
           }

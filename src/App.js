@@ -112,7 +112,7 @@ const App = () => {
           alert.isShow && (
             <Alert
               text={alert.text}
-              type={alert.isSuccess ? 'success' : 'warning'}
+              isSuccess={alert.isSuccess}
             />
           )
         }
