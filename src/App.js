@@ -1,6 +1,6 @@
 /** NOTE: 클래스형 컴포넌트 -> 함수형 컴포넌트 */
 import { useState } from 'react'
-import { ExpenseForm, ExpenseList } from 'components'
+import { Alert, ExpenseForm, ExpenseList } from 'components'
 import './App.css'
 
 /** NOTE: 컴포넌트
@@ -30,10 +30,19 @@ const App = () => {
     // 폼 제출과 동시에 페이지 새로고침 등 방지
     e.preventDefault()
 
-    if (charge == '' || amount == 0) return
+    if (charge == '' || amount == 0) {
+      if (alert.isShow) return
+      // 알림창 호출 및 제거 타이머
+      setAlert({ isShow: true, text: '내용을 입력해 주세요', isSuccess: false })
+      hideAlert()
+      return
+    }
 
     // 지출 목록 세팅
     setExpenses([...expenses, { id: crypto.randomUUID(), charge: charge, amount: amount }]) // 기존 목록 + 신규 내용
+    // 알림창 호출 및 제거 타이머
+    setAlert({ isShow: true, text: '성공적으로 입력되었습니다', isSuccess: true })
+    hideAlert()
     // 입력 값 리셋
     setCharge('')
     setAmount(0)
@@ -43,9 +52,15 @@ const App = () => {
     const newExpenses = expenses.filter(expense => expense.id != id)
     // 상태 업데이트 -> 상태 업데이트와 함께 화면이 리렌더링 된다
     setExpenses(newExpenses)
+    // 알림창 호출 및 제거 타이머
+    setAlert({ isShow: true, text: '지출 목록이 제거되었습니다', isSuccess: true })
+    hideAlert()
   }
   const handleModify = id => {
     console.log(id)
+    // 알림창 호출 및 제거 타이머
+    setAlert({ isShow: true, text: '지출 목록이 수정되었습니다', isSuccess: true })
+    hideAlert()
   }
 
   // 지출 항목
@@ -60,27 +75,50 @@ const App = () => {
     setAmount(e.target.valueAsNumber)
   }
 
+  // 알림창
+  const [alert, setAlert] = useState({ isShow: false, text: '', isSuccess: true })
+  const hideAlert = () => {
+    setTimeout(() => {
+      setAlert({ isShow: false })
+    }, 1500)
+  }
+
   // UI 작성 부분
   return (
-    <main>
-      {/* 지출 등록 */}
-      <ExpenseForm
-        charge={charge}
-        handleCharge={handleCharge}
-        amount={amount}
-        handleAmount={handleAmount}
-        handleSubmit={handleSubmit}
-      />
-      {
-        /* 지출 목록 */
-        // 데이터(변수, 함수)는 HTML 의 속성처럼 전달(상속)해줄 수 있다
-      }
-      <ExpenseList
-        expenses={expenses}
-        handleDelete={handleDelete}
-        handleModify={handleModify}
-      />
-    </main>
+    <>
+      <header>
+        {
+          /** 삼항 연산자를 이용한 조건부 렌더링 */
+          alert.isShow ? (
+            <Alert
+              text={alert.text}
+              type={alert.isSuccess ? 'success' : 'warning'}
+            />
+          ) : (
+            ''
+          )
+        }
+      </header>
+      <main>
+        {/* 지출 등록 */}
+        <ExpenseForm
+          charge={charge}
+          handleCharge={handleCharge}
+          amount={amount}
+          handleAmount={handleAmount}
+          handleSubmit={handleSubmit}
+        />
+        {
+          /* 지출 목록 */
+          // 데이터(변수, 함수)는 HTML 의 속성처럼 전달(상속)해줄 수 있다
+        }
+        <ExpenseList
+          expenses={expenses}
+          handleDelete={handleDelete}
+          handleModify={handleModify}
+        />
+      </main>
+    </>
   )
 }
 

@@ -21,7 +21,7 @@ module.exports = {
         active: colors.gray['950'],
         success: colors.green['500'],
         danger: colors.red['500'],
-        warning: colors.orange['500'],
+        warning: colors.yellow['400'],
         info: colors.gray['500']
       },
       boxShadow: {

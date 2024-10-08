@@ -2,7 +2,7 @@
  * extends 키워드를 통해 리액트의 Component 속성을 상속한다
  */
 import { Component } from 'react'
-import { ExpenseFormCC, ExpenseListCC } from 'components'
+import { AlertCC, ExpenseFormCC, ExpenseListCC } from 'components'
 import './App.css'
 
 class App extends Component {
@@ -29,7 +29,8 @@ class App extends Component {
         { id: 3, charge: '식비', amount: 1200 }
       ],
       charge: '',
-      amount: 0
+      amount: 0,
+      alert: { isShow: false, text: '', isSuccess: true }
     }
   }
   // initExpenses = [
@@ -52,6 +53,9 @@ class App extends Component {
         { id: crypto.randomUUID(), charge: this.state.charge, amount: this.state.amount }
       ]
     }) // 기존 목록 + 신규 내용
+    // 알림창 호출 및 제거 타이머
+    this.setState({ alert: { isShow: true, text: '성공적으로 입력되었습니다', isSuccess: true } })
+    this.hideAlert()
     // 입력 값 리셋
     this.setState({ charge: '' })
     this.setState({ amount: 0 })
@@ -62,9 +66,15 @@ class App extends Component {
     // 상태 업데이트 -> 상태 업데이트와 함께 화면이 리렌더링 된다
     this.setState({ expenses: newExpenses })
     // const newExpenses = this.initExpenses.filter(expense => expense.id != id)
+    // 알림창 호출 및 제거 타이머
+    this.setState({ alert: { isShow: true, text: '지출 목록이 제거되었습니다', isSuccess: true } })
+    this.hideAlert()
   }
   handleModify = id => {
     console.log(id)
+    // 알림창 호출 및 제거 타이머
+    this.setState({ alert: { isShow: true, text: '지출 목록이 수정되었습니다', isSuccess: true } })
+    this.hideAlert()
   }
 
   // 지출 항목
@@ -77,28 +87,50 @@ class App extends Component {
     this.setState({ amount: e.target.valueAsNumber })
   }
 
+  // 알림창
+  hideAlert = () => {
+    setTimeout(() => {
+      this.setState({ alert: { isShow: false } })
+    }, 1500)
+  }
+
   render() {
     // UI 작성 부분
     return (
-      <main>
-        {/* 지출 등록 */}
-        <ExpenseFormCC
-          charge={this.state.charge}
-          handleCharge={this.handleCharge}
-          amount={this.state.amount}
-          handleAmount={this.handleAmount}
-          handleSubmit={this.handleSubmit}
-        />
-        {
-          /* 지출 목록 */
-          // 데이터(변수, 함수)는 HTML 의 속성처럼 전달(상속)해줄 수 있다
-        }
-        <ExpenseListCC
-          expenses={this.state.expenses}
-          handleDelete={this.handleDelete}
-          handleModify={this.handleModify}
-        />
-      </main>
+      <>
+        <header>
+          {
+            /** 삼항 연산자를 이용한 조건부 렌더링 */
+            alert.isShow ? (
+              <AlertCC
+                text={alert.text}
+                type={alert.isSuccess ? 'success' : 'warning'}
+              />
+            ) : (
+              ''
+            )
+          }
+        </header>
+        <main>
+          {/* 지출 등록 */}
+          <ExpenseFormCC
+            charge={this.state.charge}
+            handleCharge={this.handleCharge}
+            amount={this.state.amount}
+            handleAmount={this.handleAmount}
+            handleSubmit={this.handleSubmit}
+          />
+          {
+            /* 지출 목록 */
+            // 데이터(변수, 함수)는 HTML 의 속성처럼 전달(상속)해줄 수 있다
+          }
+          <ExpenseListCC
+            expenses={this.state.expenses}
+            handleDelete={this.handleDelete}
+            handleModify={this.handleModify}
+          />
+        </main>
+      </>
     )
   }
 }
