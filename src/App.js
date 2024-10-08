@@ -60,6 +60,9 @@ const App = () => {
     setEdit(false)
     setEditId('')
   }
+  const clearItems = () => {
+    setExpenses([])
+  }
   const handleDelete = id => {
     // 전달받은 id 만 제외하여 새로운 배열 생성
     const newExpenses = expenses.filter(item => item.id != id)
@@ -106,13 +109,11 @@ const App = () => {
       <header>
         {
           /** 삼항 연산자를 이용한 조건부 렌더링 */
-          alert.isShow ? (
+          alert.isShow && (
             <Alert
               text={alert.text}
               type={alert.isSuccess ? 'success' : 'warning'}
             />
-          ) : (
-            ''
           )
         }
       </header>
@@ -132,6 +133,7 @@ const App = () => {
         }
         <ExpenseList
           expenses={expenses}
+          clearItems={clearItems}
           handleDelete={handleDelete}
           handleModify={handleModify}
           editId={editId}

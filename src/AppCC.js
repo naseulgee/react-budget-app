@@ -69,6 +69,9 @@ class App extends Component {
     this.setState({ edit: false })
     this.setState({ editId: '' })
   }
+  clearItems = () => {
+    this.setState({ expenses: [] })
+  }
   handleDelete = id => {
     // 전달받은 id 만 제외하여 새로운 배열 생성
     const newExpenses = this.state.expenses.filter(expense => expense.id != id)
@@ -114,13 +117,11 @@ class App extends Component {
         <header>
           {
             /** 삼항 연산자를 이용한 조건부 렌더링 */
-            alert.isShow ? (
+            alert.isShow && (
               <AlertCC
                 text={alert.text}
                 type={alert.isSuccess ? 'success' : 'warning'}
               />
-            ) : (
-              ''
             )
           }
         </header>
@@ -140,6 +141,7 @@ class App extends Component {
           }
           <ExpenseListCC
             expenses={this.state.expenses}
+            clearItems={this.clearItems}
             handleDelete={this.handleDelete}
             handleModify={this.handleModify}
             editId={this.state.editId}

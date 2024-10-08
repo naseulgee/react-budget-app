@@ -20,12 +20,15 @@ class ExpenseList extends Component {
             원
           </span>
         </h1>
-        <button
-          type='button'
-          className='mb-10 mt-3 text-sm text-gray-500'>
-          <FaTrashCan className='me-1 inline align-text-top' />
-          목록 비우기
-        </button>
+        {this.props.expenses.length > 0 && (
+          <button
+            type='button'
+            className='mb-10 mt-3 text-sm text-gray-500'
+            onClick={this.props.clearItems}>
+            <FaTrashCan className='me-1 inline align-text-top' />
+            목록 비우기
+          </button>
+        )}
         <ul className='flex flex-col gap-5'>
           {
             // 상속받은 데이터는 this.props 를 통해 접근이 가능하다
@@ -50,6 +53,7 @@ class ExpenseList extends Component {
 // 상속 데이터 타입 정의
 ExpenseList.propTypes = {
   expenses: PropTypes.array,
+  clearItems: PropTypes.func,
   handleDelete: PropTypes.func,
   handleModify: PropTypes.func,
   editId: PropTypes.string
