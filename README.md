@@ -126,5 +126,23 @@ npm i react-icons
 <details open>
 <summary>접기/펼치기</summary>
 
+## 패키지 설치 및 세팅
+```
+npm i -D gh-pages
+```
+1. 깃헙에서 SPA 배포를 위한 패이지
+
+## 설정 파일 수정
+1. package.json 파일 내용 수정
+```
+....
+"homepage": "https://깃헙유저명.github.io/저장소명/",
+"scripts": {
+    ....
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+},
+```
+
 </details>
 <!-- end  : ================================================================ -->
