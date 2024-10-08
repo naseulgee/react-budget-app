@@ -2,7 +2,7 @@ import { ExpenseItem } from 'components'
 import { FaTrashCan } from 'react-icons/fa6'
 import PropTypes from 'prop-types'
 
-const ExpenseList = ({ expenses, handleDelete, handleModify }) => {
+const ExpenseList = ({ expenses, handleDelete, handleModify, editId }) => {
   return (
     <section className='container mx-auto mb-80 px-5 py-10 md:mb-5 md:px-0'>
       <h1 className='text-2xl'>
@@ -34,6 +34,7 @@ const ExpenseList = ({ expenses, handleDelete, handleModify }) => {
                 expense={expense}
                 handleDelete={handleDelete}
                 handleModify={handleModify}
+                edit={expense.id == editId}
               />
             </li>
           ))
@@ -47,7 +48,8 @@ const ExpenseList = ({ expenses, handleDelete, handleModify }) => {
 ExpenseList.propTypes = {
   expenses: PropTypes.array,
   handleDelete: PropTypes.func,
-  handleModify: PropTypes.func
+  handleModify: PropTypes.func,
+  editId: PropTypes.string
 }
 
 export default ExpenseList

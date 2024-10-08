@@ -1,9 +1,10 @@
 import { FaPen, FaTrashCan } from 'react-icons/fa6'
 import PropTypes from 'prop-types'
 
-const ExpenseItem = ({ expense, handleDelete, handleModify }) => {
+const ExpenseItem = ({ expense, handleDelete, handleModify, edit }) => {
   return (
-    <div className='flex w-full flex-wrap gap-5 rounded-md bg-gray-50 p-5 shadow-xl md:flex-nowrap'>
+    <div
+      className={`flex w-full flex-wrap gap-5 rounded-md bg-gray-50 p-5 shadow-xl md:flex-nowrap ${edit ? 'bg-gray-300' : ''}`}>
       <strong className='basis-full md:basis-1/2'>{expense.charge}</strong>
       <span className='basis-full text-gray-500 md:basis-1/2'>{expense.amount} 원</span>
       <div className='flex basis-full justify-end gap-2 md:basis-1/12'>
@@ -29,7 +30,8 @@ const ExpenseItem = ({ expense, handleDelete, handleModify }) => {
 ExpenseItem.propTypes = {
   expense: PropTypes.object,
   handleDelete: PropTypes.func,
-  handleModify: PropTypes.func
+  handleModify: PropTypes.func,
+  edit: PropTypes.bool
 }
 
 export default ExpenseItem

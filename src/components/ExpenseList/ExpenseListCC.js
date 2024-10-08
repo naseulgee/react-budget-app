@@ -36,6 +36,7 @@ class ExpenseList extends Component {
                   expense={expense}
                   handleDelete={this.props.handleDelete}
                   handleModify={this.props.handleModify}
+                  edit={expense.id == this.props.editId}
                 />
               </li>
             ))
@@ -50,7 +51,8 @@ class ExpenseList extends Component {
 ExpenseList.propTypes = {
   expenses: PropTypes.array,
   handleDelete: PropTypes.func,
-  handleModify: PropTypes.func
+  handleModify: PropTypes.func,
+  editId: PropTypes.string
 }
 
 export default ExpenseList

@@ -28,6 +28,8 @@ class App extends Component {
         { id: 2, charge: '교통비', amount: 400 },
         { id: 3, charge: '식비', amount: 1200 }
       ],
+      edit: false,
+      editId: '',
       charge: '',
       amount: 0,
       alert: { isShow: false, text: '', isSuccess: true }
@@ -44,21 +46,28 @@ class App extends Component {
     // 폼 제출과 동시에 페이지 새로고침 등 방지
     e.preventDefault()
 
-    if (this.state.charge == '' || this.state.amount == 0) return
+    const { expenses, charge, amount, edit, editId } = this.state
+    if (charge == '' || amount == 0) return
 
     // 지출 목록 세팅
-    this.setState({
-      expenses: [
-        ...this.state.expenses,
-        { id: crypto.randomUUID(), charge: this.state.charge, amount: this.state.amount }
-      ]
-    }) // 기존 목록 + 신규 내용
+    let newExpenses
+    let type
+    if (!edit) {
+      newExpenses = [...expenses, { id: crypto.randomUUID(), charge, amount }] // 기존 목록 + 신규 내용
+      type = '입력'
+    } else {
+      newExpenses = expenses.map(item => (item.id == editId ? { ...item, charge, amount } : item))
+      type = '수정'
+    }
+    this.setState({ expenses: newExpenses })
     // 알림창 호출 및 제거 타이머
-    this.setState({ alert: { isShow: true, text: '성공적으로 입력되었습니다', isSuccess: true } })
+    this.setState({ alert: { isShow: true, text: '성공적으로 ' + type + '되었습니다', isSuccess: true } })
     this.hideAlert()
     // 입력 값 리셋
     this.setState({ charge: '' })
     this.setState({ amount: 0 })
+    this.setState({ edit: false })
+    this.setState({ editId: '' })
   }
   handleDelete = id => {
     // 전달받은 id 만 제외하여 새로운 배열 생성
@@ -71,10 +80,14 @@ class App extends Component {
     this.hideAlert()
   }
   handleModify = id => {
-    console.log(id)
-    // 알림창 호출 및 제거 타이머
-    this.setState({ alert: { isShow: true, text: '지출 목록이 수정되었습니다', isSuccess: true } })
-    this.hideAlert()
+    // 수정 값 가져오기
+    const expense = this.state.expenses.find(item => item.id == id)
+    const { charge, amount } = expense
+    // 입력창에 값 세팅하기
+    this.setState({ charge: charge })
+    this.setState({ amount: amount })
+    this.setState({ editId: id })
+    this.setState({ edit: true })
   }
 
   // 지출 항목
@@ -119,6 +132,7 @@ class App extends Component {
             amount={this.state.amount}
             handleAmount={this.handleAmount}
             handleSubmit={this.handleSubmit}
+            edit={this.state.edit}
           />
           {
             /* 지출 목록 */
@@ -128,6 +142,7 @@ class App extends Component {
             expenses={this.state.expenses}
             handleDelete={this.handleDelete}
             handleModify={this.handleModify}
+            editId={this.state.editId}
           />
         </main>
       </>

@@ -26,6 +26,8 @@ const App = () => {
 
   // 지출 목록
   const [expenses, setExpenses] = useState([])
+  const [edit, setEdit] = useState(false)
+  const [editId, setEditId] = useState('')
   const handleSubmit = e => {
     // 폼 제출과 동시에 페이지 새로고침 등 방지
     e.preventDefault()
@@ -39,17 +41,28 @@ const App = () => {
     }
 
     // 지출 목록 세팅
-    setExpenses([...expenses, { id: crypto.randomUUID(), charge: charge, amount: amount }]) // 기존 목록 + 신규 내용
+    let newExpenses
+    let type
+    if (!edit) {
+      newExpenses = [...expenses, { id: crypto.randomUUID(), charge, amount }] // 기존 목록 + 신규 내용
+      type = '입력'
+    } else {
+      newExpenses = expenses.map(item => (item.id == editId ? { ...item, charge, amount } : item))
+      type = '수정'
+    }
+    setExpenses(newExpenses)
     // 알림창 호출 및 제거 타이머
-    setAlert({ isShow: true, text: '성공적으로 입력되었습니다', isSuccess: true })
+    setAlert({ isShow: true, text: '성공적으로 ' + type + '되었습니다', isSuccess: true })
     hideAlert()
     // 입력 값 리셋
     setCharge('')
     setAmount(0)
+    setEdit(false)
+    setEditId('')
   }
   const handleDelete = id => {
     // 전달받은 id 만 제외하여 새로운 배열 생성
-    const newExpenses = expenses.filter(expense => expense.id != id)
+    const newExpenses = expenses.filter(item => item.id != id)
     // 상태 업데이트 -> 상태 업데이트와 함께 화면이 리렌더링 된다
     setExpenses(newExpenses)
     // 알림창 호출 및 제거 타이머
@@ -57,10 +70,14 @@ const App = () => {
     hideAlert()
   }
   const handleModify = id => {
-    console.log(id)
-    // 알림창 호출 및 제거 타이머
-    setAlert({ isShow: true, text: '지출 목록이 수정되었습니다', isSuccess: true })
-    hideAlert()
+    // 수정 값 가져오기
+    const expense = expenses.find(item => item.id == id)
+    const { charge, amount } = expense
+    // 입력창에 값 세팅하기
+    setCharge(charge)
+    setAmount(amount)
+    setEditId(id)
+    setEdit(true)
   }
 
   // 지출 항목
@@ -107,6 +124,7 @@ const App = () => {
           amount={amount}
           handleAmount={handleAmount}
           handleSubmit={handleSubmit}
+          edit={edit}
         />
         {
           /* 지출 목록 */
@@ -116,6 +134,7 @@ const App = () => {
           expenses={expenses}
           handleDelete={handleDelete}
           handleModify={handleModify}
+          editId={editId}
         />
       </main>
     </>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaPlus } from 'react-icons/fa6'
+import { FaPlus, FaCheck } from 'react-icons/fa6'
 import PropTypes from 'prop-types'
 
 class ExpenseForm extends Component {
@@ -44,8 +44,17 @@ class ExpenseForm extends Component {
             type='submit'
             className='block basis-full rounded-md bg-secondary px-3.5 py-2 text-center shadow focus-within:outline-none hover:bg-active focus:bg-active md:mt-7 md:basis-0'
             onClick={this.props.handleSubmit}>
-            <FaPlus className='inline' />
-            <span className='ms-2 inline md:hidden'>추가</span>
+            {!this.props.edit ? (
+              <>
+                <FaPlus className='inline' />
+                <span className='ms-2 inline md:hidden'>추가</span>
+              </>
+            ) : (
+              <>
+                <FaCheck className='inline' />
+                <span className='ms-2 inline md:hidden'>수정</span>
+              </>
+            )}
           </button>
         </div>
       </form>
@@ -58,7 +67,8 @@ ExpenseForm.propTypes = {
   handleCharge: PropTypes.func,
   amount: PropTypes.number,
   handleAmount: PropTypes.func,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  edit: PropTypes.bool
 }
 
 export default ExpenseForm
