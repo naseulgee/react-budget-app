@@ -9,7 +9,16 @@ class ExpenseList extends Component {
       <section className='container mx-auto mb-80 px-5 py-10 md:mb-5 md:px-0'>
         <h1 className='text-2xl'>
           <strong>총 지출 : </strong>
-          <span>0 원</span>
+          <span>
+            {
+              /** NOTE: reduce 함수
+               * - 배열을 순회하며 값을 계산하여 반환하는 함수
+               * 배열.reduce((누산값, 현재값, 현재 인덱스, 원본 배열 => 계산), 초기값)
+               */
+              this.props.expenses.reduce((acc, curr) => acc + curr.amount, 0)
+            }
+            원
+          </span>
         </h1>
         <button
           type='button'
