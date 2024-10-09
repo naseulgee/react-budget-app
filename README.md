@@ -51,6 +51,7 @@ git push origin master
 ```
 npx create-react-app 경로/어플명
 npm i -D postcss autoprefixer
+npm i -D prettier eslint eslint-plugin-react eslint-plugin-prettier eslint-config-prettier
 ```
 1. 프로젝트 생성
 2. CSS 를 위한 패키지 설치
@@ -58,6 +59,15 @@ npm i -D postcss autoprefixer
         : css 파일의 후처리를 도와줌
     - autoprefixer
         : 접근성을 위한 접두사를 붙여줌
+3. 문법 교정과 코드 포맷팅을 위한 패키지 설치
+    - prettier
+        : 코드 포맷팅
+    - eslint
+        : 문법 교정
+    - eslint-plugin-react
+    - eslint-plugin-prettier
+    - eslint-config-prettier
+        : eslint와 prettier 간 포맷팅 충돌이 발생할 수 있는 rule을 해제
 
 ### [옵션] 추가 패키지 설치 및 세팅
 ```
@@ -90,15 +100,6 @@ npm i react-icons
 
 ### 파일 내용 수정
 1. /src/index.css
-</details>
-<!-- end  : ================================================================ -->
-
-
-<!-- start: ================================================================ -->
-# 🧪 테스트
-<details open>
-<summary>접기/펼치기</summary>
-
 </details>
 <!-- end  : ================================================================ -->
 
