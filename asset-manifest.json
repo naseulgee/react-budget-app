@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-budget-app/static/css/main.1e1ffecc.css",
-    "main.js": "/react-budget-app/static/js/main.d80289b4.js",
+    "main.css": "/react-budget-app/static/css/main.3b169cde.css",
+    "main.js": "/react-budget-app/static/js/main.83be307f.js",
     "index.html": "/react-budget-app/index.html",
-    "main.1e1ffecc.css.map": "/react-budget-app/static/css/main.1e1ffecc.css.map",
-    "main.d80289b4.js.map": "/react-budget-app/static/js/main.d80289b4.js.map"
+    "main.3b169cde.css.map": "/react-budget-app/static/css/main.3b169cde.css.map",
+    "main.83be307f.js.map": "/react-budget-app/static/js/main.83be307f.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e1ffecc.css",
-    "static/js/main.d80289b4.js"
+    "static/css/main.3b169cde.css",
+    "static/js/main.83be307f.js"
   ]
 }
